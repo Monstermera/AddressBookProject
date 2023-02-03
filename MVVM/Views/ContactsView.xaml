@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="MVVM.Views.ContactsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVM.Views"
+             xmlns:viewmodels="clr-namespace:MVVM.ViewModels"
+             xmlns:models="clr-namespace:MVVM.Models"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:ContactsViewModel}"
+             d:DesignHeight="800" d:DesignWidth="1000"
+             Background="#dcf0f8">
+
+
+    <Grid Grid.Column="1" Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="22" FontWeight="Medium" Margin="0 20 0 20" />
+
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ListView BorderThickness="0" Background="Transparent" ItemsSource="{Binding Contacts}" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectedItem="{Binding SelectedContact}">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:ContactModel}">
+                        <Grid Margin="0 10 20 10" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" HorizontalAlignment="Left" Width="100" >
+                                <TextBlock Text="{Binding DisplayName}" FontWeight="Medium" />
+                                <TextBlock Text="{Binding Email}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            <Grid Grid.Column="2" HorizontalAlignment="Right">
+                <ContentControl x:Name="ContactDetails" Content="{Binding SelectedContact}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type models:ContactModel}">
+                            <Grid>
+                                <StackPanel Margin="0 0 30 0">
+
+                                    <TextBlock Text="First Name:" FontSize="13" FontWeight="Medium"/>
+                                    <TextBlock Text="{Binding FirstName}" Margin="0 5 0 15"/>
+
+                                    <TextBlock Text="Last Name:" FontSize="13" FontWeight="Medium"/>
+                                    <TextBlock Text="{Binding LastName}" Margin="0 5 0 15"/>
+
+                                    <TextBlock Text="Email:" FontSize="13" FontWeight="Medium"/>
+                                    <TextBlock Text="{Binding Email}" Margin="0 5 0 15"/>
+
+                                    <TextBlock Text="Phone Number:" FontSize="13" FontWeight="Medium"/>
+                                    <TextBlock Text="{Binding PhoneNumber}" Margin="0 5 0 15"/>
+
+                                    <TextBlock Text="Street Name:" FontSize="13" FontWeight="Medium"/>
+                                    <TextBlock Text="{Binding StreetName}" Margin="0 5 0 15"/>
+
+                                    <TextBlock Text="City:" FontSize="13" FontWeight="Medium"/>
+                                    <TextBlock Text="{Binding City}" Margin="0 5 0 15"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+            </Grid>
+        </Grid>
+
+    </Grid>
+
+
+</UserControl>
